@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-    <types>
-        <members>API_Scheduled_Retry </members>
-        <members>API_Callout_Queueable </members>
-        <name>ApexClass</name>
-    </types>
-   
-    <version>64.0</version>
+	<types>
+		<members>API_Callout_Failure__e.Endpoint__c</members>
+		<members>API_Callout_Failure__e.Error_Message__c</members>
+		<members>API_Callout_Failure__e.Request__c</members>
+		<members>Api_Callout_Log__c.Endpoint__c</members>
+		<members>Api_Callout_Log__c.Request_Body__c</members>
+		<members>Api_Callout_Log__c.Response_Body__c</members>
+		<members>Api_Callout_Log__c.Response_Code__c</members>
+		<members>Api_Callout_Log__c.Retry_Count__c</members>
+		<members>Api_Callout_Log__c.Status__c</members>
+		<name>CustomField</name>
+	</types>
+	<types>
+		<members>API_Callout_Failure__e</members>
+		<members>Api_Callout_Log__c</members>
+		<name>CustomObject</name>
+	</types>
+	<version>64.0</version>
 </Package>
