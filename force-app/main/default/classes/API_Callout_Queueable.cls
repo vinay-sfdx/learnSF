@@ -1,3 +1,38 @@
+/**
+ * @class API_Callout_Queueable
+ * @description
+ *   Implements a Queueable Apex job that performs an HTTP POST callout to a specified API endpoint.
+ *   Handles retries with exponential backoff and logs failures. If the maximum number of retries is reached,
+ *   publishes a platform event for manual intervention.
+ *
+ * @implements Queueable, Database.AllowsCallouts
+ *
+ * @param requestBody   The JSON request body to send in the callout.
+ * @param retryCount    The current retry attempt count.
+ *
+ * @constants
+ *   MAX_RETRIES        The maximum number of retry attempts before giving up.
+ *   API_ENDPOINT       The endpoint URL for the API callout.
+ *
+ * @methods
+ *   execute(QueueableContext context)
+ *     Performs the HTTP callout, handles success/failure, schedules retries, and publishes failure events.
+ *
+ *   getBackoffTime(Integer attempt)
+ *     Calculates the delay in minutes before the next retry based on the attempt number (exponential backoff).
+ *
+ *   scheduleRetry(Integer minutes)
+ *     Schedules the next retry using a scheduled job after the specified delay.
+ *
+ *   logFailure(String reqBody, HttpResponse resp, Integer attempt, String errorMsgOpt)
+ *     Logs the failure details to a custom object for monitoring and troubleshooting.
+ *
+ *   logFailure(String reqBody, HttpResponse resp, Integer attempt)
+ *     Overloaded method to log HTTP errors.
+ *
+ *   publishFailureEvent(String request, String message)
+ *     Publishes a platform event to notify about a permanent failure after all retries are exhausted.
+ */
 public class API_Callout_Queueable implements Queueable, Database.AllowsCallouts {
     private String requestBody;
     private Integer retryCount;
